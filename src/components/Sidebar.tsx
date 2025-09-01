@@ -8,19 +8,20 @@ import {
   Text,
   Group,
 } from "@mantine/core";
+
 interface SidebarComponentProps  {
   userName: string;
   type?: "admin" |"student";
 }
-export type { SidebarProps };
-export default function Sidebar() {
+export type { SidebarComponentProps };
+
+export default function Sidebar({userName, type }: SidebarComponentProps) {
   return (
-    <Stack
+    <Stack 
       align="stretch"
       justify="space-between"
       gap="md"
-      style={{ height: "100%" }}
-    >
+      style={{ height: "100%" }}>
       {/* Menu / เมนู*/}
       <Box>
         <NavLink
@@ -43,8 +44,13 @@ export default function Sidebar() {
       </Box>
       {/* แสดงผู้ใช้งาน */}
       <Box p={10}>
-        <Text>chanadda</Text>
-      </Box>
+        <Group>
+          <Indicator inline size={12} offset={7} position="bottom-end" color="green" withBorder>
+            <Avatar size="lg" src="/67679.jpg" radius="xl" />
+          </Indicator>
+          <Text component={RouterNavLink} to="/">User: {userName}: {type} </Text>
+        </Group>      
+        </Box>
     </Stack>
   );
 }
